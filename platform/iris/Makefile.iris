@@ -19,21 +19,12 @@ CONTIKI_PLAT_DEFS = -DF_CPU=8000000UL -DAUTO_CRC_PADDING=2 #-DUSART_BAUD_115200
 
 MCU=atmega1281
 AVRDUDE_OPTIONS=-V
-AVRDUDE_PROGRAMMER=mib510
+AVRDUDE_PROGRAMMER=$(PRGBOARD)
 #AVRDUDE_PROGRAMMER=jtag2
 #AVRDUDE_PORT=usb
 AVRDUDE_PORT=$(PORT)
-
-include $(CONTIKIAVR)/Makefile.avr
-
-
-%.od: %.$(TARGET)
-	avr-objdump -zhD $< > $@
-
-
-ifeq ($(PRGBOARD), )
-  PRGBOARD = mib510
-endif
+BAUD_RATE=115200
+LPORT=/dev/ttyUSB1
 
 ifeq ($(PORT), )
   ifeq ($(HOST_OS), Windows)
@@ -42,6 +33,22 @@ ifeq ($(PORT), )
     PORT = /dev/ttyUSB0
   endif
 endif
+
+ifeq ($(PRGBOARD), )
+  PRGBOARD = mib510
+endif
+
+include $(CONTIKIAVR)/Makefile.avr
+
+
+%.od: %.$(TARGET)
+	avr-objdump -zhD $< > $@
+
+
+login:
+	./../../tools/sky/serialdump-linux -b$(BAUD_RATE) $(LPORT)
+
+
 
 PRGBOARD_FILE = $(CONTIKI)/platform/$(TARGET)/buildscripts/Makefile.$(PRGBOARD)
 HAVE_PRGBOARD_FILE = $(wildcard $(PRGBOARD_FILE))
