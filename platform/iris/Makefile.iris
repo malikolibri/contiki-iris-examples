@@ -46,7 +46,7 @@ include $(CONTIKIAVR)/Makefile.avr
 
 
 login:
-	./../../tools/sky/serialdump-linux -b$(BAUD_RATE) $(LPORT)
+	./$(CONTIKI)/tools/sky/serialdump-linux -b$(BAUD_RATE) $(LPORT)
 
 
 
