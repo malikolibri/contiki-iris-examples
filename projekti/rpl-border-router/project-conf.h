@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009, University of Colombo School of Computing
+ * Copyright (c) 2010, Swedish Institute of Computer Science.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,34 +26,29 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * This file is part of the Contiki operating system.
- *
- * @(#)$$
  */
 
-#include "contiki.h"
-#include <stdio.h>
+#ifndef __PROJECT_ROUTER_CONF_H__
+#define __PROJECT_ROUTER_CONF_H__
 
-/*---------------------------------------------------------------------------*/
-PROCESS(test_light_process, "light test");
-AUTOSTART_PROCESSES(&test_light_process);
-/*---------------------------------------------------------------------------*/
-PROCESS_THREAD(test_light_process, ev, data)
-{
-  static struct etimer et;
+#ifndef UIP_FALLBACK_INTERFACE
+#define UIP_FALLBACK_INTERFACE rpl_interface
+#endif
 
-  PROCESS_BEGIN();
+#ifndef QUEUEBUF_CONF_NUM
+#define QUEUEBUF_CONF_NUM          4
+#endif
 
-  while(1) {
- 	adc_init();
-    printf("Light : %d\n",get_light());
-    printf("Temp : %d\n",get_temp());
-    
-    etimer_set(&et, CLOCK_SECOND / 2);
-    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));    
- 
-  }
+#ifndef UIP_CONF_BUFFER_SIZE
+#define UIP_CONF_BUFFER_SIZE    140
+#endif
 
-  PROCESS_END();
-}
-/*---------------------------------------------------------------------------*/
+#ifndef UIP_CONF_RECEIVE_WINDOW
+#define UIP_CONF_RECEIVE_WINDOW  60
+#endif
+
+#ifndef WEBSERVER_CONF_CFS_CONNS
+#define WEBSERVER_CONF_CFS_CONNS 2
+#endif
+
+#endif /* __PROJECT_ROUTER_CONF_H__ */

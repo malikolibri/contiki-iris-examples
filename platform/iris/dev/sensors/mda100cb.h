@@ -1,8 +1,9 @@
 #ifndef __MDA100CB_H__
 #define __MDA100CB_H__
 
-#include <avr/io.h>
+#include "avr/io.h"
 #include "contiki-conf.h"
+#include "dev/adc.h"
 
 /* MDA100CB, the light sensor power is controlled
  * by setting signal INT1(PORTD pin 1).
@@ -22,7 +23,8 @@
 #define TEMP_PIN_MASK _BV(0)
 #define TEMP_ADC_CHANNEL 1
 
+
 uint16_t get_light();
 uint16_t get_temp();
 
-#endif __MDA100CB_H__
+#endif //__MDA100CB_H__
