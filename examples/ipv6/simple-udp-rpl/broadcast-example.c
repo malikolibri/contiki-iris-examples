@@ -43,7 +43,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define UDP_PORT 5555
+#define UDP_PORT 1234
 
 #define SEND_INTERVAL		(20 * CLOCK_SECOND)
 #define SEND_TIME		(random_rand() % (SEND_INTERVAL))

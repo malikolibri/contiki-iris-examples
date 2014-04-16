@@ -40,3 +40,19 @@ get_temp()
   return reading;
 }
 /*---------------------------------------------------------------------------*/
+uint16_t
+get_battery()
+{
+  uint16_t reading;
+  
+  /* Enable temperature sensor. */
+  BATTERY_PORT_DDR |= BATTERY_PIN_MASK;
+  BATTERY_PORT |= BATTERY_PIN_MASK;
+  /* Read ADC. */
+  reading = get_adc(BATTERY_ADC_CHANNEL);
+  /* Disable temperature sensor. */
+  BATTERY_PORT_DDR &= ~BATTERY_PIN_MASK;
+  BATTERY_PORT &= ~BATTERY_PIN_MASK;
+  
+  return reading;
+}

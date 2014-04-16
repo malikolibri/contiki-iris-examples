@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Temperatura i osvetljenje</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="{{ static_url("css/style.css") }}">
+<script type="text/javascript" src="{{ static_url("js/jquery.js") }}"></script>
+<script type="text/javascript" src="{{ static_url("js/jquery.flot.js") }}"></script>
+<script type="text/javascript" src="{{ static_url("js/jquery.flot.time.js") }}"></script>
+<script type="text/javascript" src="{{ static_url("js/app.js") }}"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <h1>Senzorska mreža | <small>Temperatura i Osvetljenje</small></h1>
+            <ul id="tabs">
+                <li><a href="#" page="tabelar" class="active" >Tabelarni prikaz</a></li>
+                <li><a href="#" page="grafPanel">Grafički prikaz</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div id="pages">
+            <div id="tabelar">
+                <div class="podesavanja">
+                    <label for="period">Period očitavanja:</label>
+                    <input type="number" name="period" id="period" min="1" max="510" value="3">
+                    <a href="#" class="primeni btn btn-default"><span class="glyphicon glyphicon-time"> </span> Promeni periodu</a>
+                    <a href="#" id="repair" class="btn btn-default"><span class="glyphicon glyphicon-refresh"> </span> Popravka RPL DAG-a</a>
+                </div>
+                <p>Live Lista nodova:
+                </p>
+                <table id="log" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td>NODE ID</td>
+                        <td>IPv6 adresa</td>
+                        <td>Osvetljenje</td>
+                        <td>Temperatura [C]</td>
+                        <td>Baterija[V]</td>
+                        <td>Vreme</td>
+                    </tr>
+                    </thead>
+                </table>
+                <p>Crveni red je poslednji osvežen.</p> 
+                    
+                <div id="grafContainer">
+                    <span class="close">ZATVORI X</span>
+                    <h2>NODE ID</h2>
+                    <div class="clear"></div>
+                    <div id="grafik" style="width:900px; height:400px;"></div>
+                    <p><i>Leva y osa - osvetljenje; desna y osa - temperatura; x osa - vreme</i></p>
+                </div>
+            </div>
+
+        <div id="grafPanel">
+        </div>
+    </div>
+    </div>
+</body>
+</html>
